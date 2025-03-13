@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import Sidebar from './components/sidebar'
 function App() {
   return (
     <>
-       <div className='bg-black h-[70vh] w-[30vw]'>
-         <h1>hell</h1>
+       <div className='bg-black h-screen'>
+        <Sidebar/>
        </div>
     </>
   )
