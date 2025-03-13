@@ -1,10 +1,10 @@
 import { useState } from 'react'
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-       
+       <div className='bg-black h-[70vh] w-[30vw]'>
+         <h1>hell</h1>
+       </div>
     </>
   )
 }
