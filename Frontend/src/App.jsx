@@ -8,12 +8,10 @@ function App() {
        <div className='bg-black h-screen'>
         <div className="h-[90%]">
           <Sidebar/>
+          <Display/>
         </div>
         <div>
           <Player/>
-        </div>
-        <div>
-        <Display/>
         </div>
        </div>
     </>
