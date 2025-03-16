@@ -12,6 +12,7 @@ function App() {
         </div>
         <div>
           <Player/>
+          <audio preload="value" ></audio>
         </div>
        </div>
     </>
