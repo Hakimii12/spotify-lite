@@ -49,11 +49,16 @@ function PlayerContextProvider(props){
         }
      }
      async function next(){
-        if(song.id < songsData.length){
+        if(song.id < songsData.length-1){
             await setSong(songsData[song.id+1])
             await audioRef.current.play()
             await setisplaying(true);
         }
+     }
+     async function thisMusic(id){
+        await setSong(songsData[id])
+        await audioRef.current.play()
+        await setisplaying(true);
      }
     const ContextValue={
         setisplaying,isplaying,
@@ -64,7 +69,8 @@ function PlayerContextProvider(props){
         playsong,
         pausesong,
         time, setTime,
-        previews,next
+        previews,next,
+        thisMusic,
     }
     return(
         <contextProvider.Provider value={ContextValue}>
