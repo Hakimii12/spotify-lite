@@ -1,9 +1,18 @@
-import { createContext, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { songsData } from "../assets/frontend-assets/assets";
 export  const contextProvider=createContext()
 function PlayerContextProvider(props){
     const [song, setSong]=useState(songsData[0])
-    console.log(song)
+    const [time, setTime]=useState({
+        currentTime:{
+            seconds:0,
+            minutes:0
+        },
+        totalTime:{
+            seconds:0,
+            minutes:0
+        }
+    })
     const [isplaying,setisplaying]=useState(false)
     const audioRef=useRef()
     const seekbg=useRef()
@@ -16,6 +25,20 @@ function PlayerContextProvider(props){
         audioRef.current.pause()
         setisplaying(false)
     }
+    useEffect(()=>{
+        audioRef.current.ontimeupdate=()=>{
+               setTime({
+                 currentTime:{
+                     seconds:Math.floor(audioRef.current.currentTime%60),
+                     minutes:Math.floor(audioRef.current.currentTime/60),
+                 },
+                 totalTime:{
+                     seconds:Math.floor(audioRef.current.duration%60),
+                     minutes:Math.floor(audioRef.current.duration/60),
+                 }
+               })
+       }
+     },[audioRef])
     const ContextValue={
         setisplaying,isplaying,
         audioRef,
@@ -23,7 +46,8 @@ function PlayerContextProvider(props){
         seekbg,
         seekbar,
         playsong,
-        pausesong
+        pausesong,
+        time, setTime
     }
     return(
         <contextProvider.Provider value={ContextValue}>

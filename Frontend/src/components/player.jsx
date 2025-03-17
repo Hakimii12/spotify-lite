@@ -7,14 +7,16 @@ function player() {
     seekbg,
     seekbar,
     playsong,
-    pausesong}=useContext(contextProvider)
+    pausesong,
+    song,
+    time,}=useContext(contextProvider)
   return (
     <div className='h-[10%] bg-black flex justify-between items-center text-white px-4'>
       <div className='hidden lg:flex items-center gap-4'>
         <img className='w-12' src={songsData[0].image} alt="" />
         <div>
-          <p>{songsData[0].name}</p>
-          <p>{songsData[0].desc.slice(0,12)}</p>
+          <p>{song.name}</p>
+          <p>{song.desc.slice(0,12)}</p>
         </div>
       </div>
       <div className="flex flex-col gap-1 m-auto">
@@ -28,11 +30,11 @@ function player() {
           <img className='w-4 cursor-pointer' src={assets.loop_icon} alt="" />
         </div>
         <div className="flex items-center gap-5">
-          <p>1:06</p>
+          <p>{time.currentTime.minutes}:{time.currentTime.seconds}</p>
           <div ref={seekbg} className="w-[60vw] max-w-[500px] bg-gray-300 cursor-pointer">
             <hr ref={seekbar} className="h-1 border-none bg-green-800 w-2" />
           </div>
-          <p>3:30</p>
+          <p>{time.totalTime.minutes}:{time.totalTime.seconds}</p>
         </div>
       </div>
       <div className="hidden lg:flex items-center gap-2">
