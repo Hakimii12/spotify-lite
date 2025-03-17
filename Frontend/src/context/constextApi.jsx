@@ -3,6 +3,7 @@ import { songsData } from "../assets/frontend-assets/assets";
 export  const contextProvider=createContext()
 function PlayerContextProvider(props){
     const [song, setSong]=useState(songsData[0])
+    console.log(songsData,song)
     const [time, setTime]=useState({
         currentTime:{
             seconds:0,
@@ -27,18 +28,33 @@ function PlayerContextProvider(props){
     }
     useEffect(()=>{
         audioRef.current.ontimeupdate=()=>{
+            seekbar.current.style.width=Number((audioRef.current.currentTime/audioRef.current.duration)*100)+'%'
                setTime({
                  currentTime:{
-                     seconds:Math.floor(audioRef.current.currentTime%60),
-                     minutes:Math.floor(audioRef.current.currentTime/60),
+                     seconds:Number(Math.floor(audioRef.current.currentTime%60)),
+                     minutes:Number(Math.floor(audioRef.current.currentTime/60)),
                  },
                  totalTime:{
-                     seconds:Math.floor(audioRef.current.duration%60),
-                     minutes:Math.floor(audioRef.current.duration/60),
+                     seconds:Number(Math.floor(audioRef.current.duration%60)),
+                     minutes:Number(Math.floor(audioRef.current.duration/60)),
                  }
                })
        }
      },[audioRef])
+     async function previews(){
+        if(song.id>0){
+            await setSong(songsData[song.id-1])
+            await audioRef.current.play()
+            await setisplaying(true);
+        }
+     }
+     async function next(){
+        if(song.id < songsData.length){
+            await setSong(songsData[song.id+1])
+            await audioRef.current.play()
+            await setisplaying(true);
+        }
+     }
     const ContextValue={
         setisplaying,isplaying,
         audioRef,
@@ -47,7 +63,8 @@ function PlayerContextProvider(props){
         seekbar,
         playsong,
         pausesong,
-        time, setTime
+        time, setTime,
+        previews,next
     }
     return(
         <contextProvider.Provider value={ContextValue}>
