@@ -10,7 +10,8 @@ function player() {
     pausesong,
     song,
     previews,next,
-    time,}=useContext(contextProvider)
+    time,
+    seekSong}=useContext(contextProvider)
   return (
     <div className='h-[10%] bg-black flex justify-between items-center text-white px-4'>
       <div className='hidden lg:flex items-center gap-4'>
@@ -32,7 +33,7 @@ function player() {
         </div>
         <div className="flex items-center gap-5">
           <p>{time.currentTime.minutes}:{time.currentTime.seconds}</p>
-          <div ref={seekbg} className="w-[60vw] max-w-[500px] bg-gray-300 cursor-pointer">
+          <div ref={seekbg} onClick={(e)=>seekSong(e)} className="w-[60vw] max-w-[500px] bg-gray-300 cursor-pointer">
             <hr ref={seekbar} className="h-1 border-none bg-green-800 w-0" />
           </div>
           <p>{time.totalTime.minutes}:{time.totalTime.seconds}</p>

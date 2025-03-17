@@ -60,6 +60,12 @@ function PlayerContextProvider(props){
         await audioRef.current.play()
         await setisplaying(true);
      }
+     async function seekSong(e) {
+        const seekBgWidth = seekbg.current.clientWidth;
+        const offsetX = e.nativeEvent.offsetX;
+        const seekTime = (offsetX / seekBgWidth) * audioRef.current.duration;
+        audioRef.current.currentTime = seekTime;
+      }
     const ContextValue={
         setisplaying,isplaying,
         audioRef,
@@ -71,6 +77,7 @@ function PlayerContextProvider(props){
         time, setTime,
         previews,next,
         thisMusic,
+        seekSong,
     }
     return(
         <contextProvider.Provider value={ContextValue}>
