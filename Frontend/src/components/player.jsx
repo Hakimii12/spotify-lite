@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { assets, songsData } from '../assets/frontend-assets/assets'
+import { contextProvider } from '../context/constextApi'
 function player() {
+  const {
+    isplaying,
+    seekbg,
+    seekbar,
+    playsong,
+    pausesong}=useContext(contextProvider)
   return (
     <div className='h-[10%] bg-black flex justify-between items-center text-white px-4'>
       <div className='hidden lg:flex items-center gap-4'>
@@ -14,14 +21,16 @@ function player() {
         <div className="flex justify-center gap-4">
           <img className='w-4 cursor-pointer' src={assets.shuffle_icon} alt="" />
           <img className='w-4 cursor-pointer' src={assets.prev_icon} alt="" />
-          <img className='w-4 cursor-pointer' src={assets.play_icon} alt="" />
+          {isplaying? <img onClick={()=>pausesong()} className='w-4 cursor-pointer' src={assets.pause_icon} alt="" />:
+                     <img onClick={()=>playsong()} className='w-4 cursor-pointer' src={assets.play_icon} alt="" />
+          }
           <img className='w-4 cursor-pointer' src={assets.next_icon} alt="" />
           <img className='w-4 cursor-pointer' src={assets.loop_icon} alt="" />
         </div>
         <div className="flex items-center gap-5">
           <p>1:06</p>
-          <div className="w-[60vw] max-w-[500px] bg-gray-300 cursor-pointer">
-            <hr className="h-1 border-none bg-green-800 w-2" />
+          <div ref={seekbg} className="w-[60vw] max-w-[500px] bg-gray-300 cursor-pointer">
+            <hr ref={seekbar} className="h-1 border-none bg-green-800 w-2" />
           </div>
           <p>3:30</p>
         </div>

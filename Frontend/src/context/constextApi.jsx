@@ -3,6 +3,7 @@ import { songsData } from "../assets/frontend-assets/assets";
 export  const contextProvider=createContext()
 function PlayerContextProvider(props){
     const [song, setSong]=useState(songsData[0])
+    console.log(song)
     const [isplaying,setisplaying]=useState(false)
     const audioRef=useRef()
     const seekbg=useRef()
@@ -12,11 +13,13 @@ function PlayerContextProvider(props){
         setisplaying(true)
     }
     function pausesong(){
-        audioRef.current.pausesong
+        audioRef.current.pause()
         setisplaying(false)
     }
     const ContextValue={
+        setisplaying,isplaying,
         audioRef,
+        setSong,song,
         seekbg,
         seekbar,
         playsong,
