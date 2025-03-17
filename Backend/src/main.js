@@ -1,9 +1,16 @@
 import express from 'express'
+import dotenv from 'dotenv';
+import Data from './Database/data.js'
+dotenv.config();
 const app=express();
 app.use(express.json());
 app.get('/',(req,res)=>{
     res.send("hello world!")
 })
-app.listen('4000',()=>{
-    console.log("server is running on 4000")
+const port = process.env.PORT
+console.log(port)
+app.listen(port,()=>{
+    console.log(`server is running on ${port}`)
 })
+//intiating a database connection
+Data()
