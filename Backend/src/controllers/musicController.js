@@ -7,7 +7,7 @@ export async function AddMusic(req,res){
     const song=new SongModel({
         name:req.body.name,
         desc:req.body.desc,
-        image:req.body.image,
+        image:req.body.filename,
         album:req.body.album,
         file:req.body.album,
         duration:req.body.duration
