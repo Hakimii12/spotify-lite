@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const songSchema=new mongoose.Schema({
     name:{
-        type:'String',
+        type:String,
         required:true
     },
     desc:{
