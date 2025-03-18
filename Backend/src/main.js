@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import Data from './Database/data.js';
 import path from 'path';
 import Cloudinary from './Database/cloudinary.js';
+import SongModel from './models/songModel.js';
+import AlbumModel from './models/albumModel.js';
 // Load .env file from the current directory
 dotenv.config();
 
