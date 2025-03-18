@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import Data from './Database/data.js';
 import path from 'path';
-
+import Cloudinary from './Database/cloudinary.js';
 // Load .env file from the current directory
 dotenv.config();
 
@@ -23,3 +23,5 @@ app.listen(port, () => {
 
 // Initiating a database connection
 Data();
+// Initaiating a cloudinary connection 
+Cloudinary()
