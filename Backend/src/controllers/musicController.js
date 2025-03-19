@@ -3,19 +3,22 @@ import cloudinary from "../Database/cloudinary.js";
 export async function AddMusic(req,res){
     console.log("Request Body:", req.body);
     console.log("Request File:", req.files.image[0]);
-    if(!req.body.name ||!req.body.desc ||!req.files.image[0].filename|| !req.body.album || !req.body.duration || !req.body.file){
+    console.log(req.files.file[0])
+    if(!req.body.name ||!req.body.desc ||!req.files.image[0].filename|| !req.body.album || !req.files.file[0].filename){
         return res.status(400).json({message:"please enter all requered information"})
     }
     const imageFile=req.files.image[0];
-    const result = await cloudinary.uploader.upload(imageFile.path,{resource_type:"auto"})
-    console.log(result)
+    const audioFile=req.files.file[0];
+    const imageResult = await cloudinary.uploader.upload(imageFile.path,{resource_type:"auto"})
+    const musicResult=await cloudinary.uploader.upload(audioFile.path,{resource_type:"auto"})
+    const duration=`${Math.floor(musicResult/60)}:${Math.floor(musicResult%60)}`
     const song=new SongModel({
         name:req.body.name,
         desc:req.body.desc,
-        image:result.secure_url,
+        image:imageResult.secure_url,
         album:req.body.album,
-        file:req.body.file,
-        duration:req.body.duration
+        file:musicResult.secure_url,
+        duration:duration
     })
     try {
         await song.save()

@@ -18,11 +18,8 @@ app.use(cors());
 app.use('/api', Routes)
 // Use PORT from environment variables or fallback to 3000
 const port = process.env.PORT || 3000;
-console.log('PORT:', port); // Debugging: Check if PORT is loaded
-
 app.listen(port, () => {
   console.log(`Server is running on ${port}`);
 });
-
 // Initiating a database connection
 Data();
