@@ -72,6 +72,7 @@ function App() {
         <input 
           type="file" 
           required
+          accept="audio/*"
           onChange={(event) => setFile(event.target.files[0])}
           className="w-full p-2 mb-4 border border-gray-300 rounded"
         />
