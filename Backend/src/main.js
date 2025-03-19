@@ -9,7 +9,8 @@ import Routes from './routes/route.js';
 import cors from 'cors'
 // Load .env file from the current directory
 dotenv.config();
-
+//cloudinary
+cloudinary
 const app = express();
 app.use(express.json());
 // initating cors
