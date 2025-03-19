@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import Data from './Database/data.js';
 import path from 'path';
-import Cloudinary from './Database/cloudinary.js';
+import cloudinary from './Database/cloudinary.js';
 import SongModel from './models/songModel.js';
 import AlbumModel from './models/albumModel.js';
 import Routes from './routes/route.js';
@@ -26,5 +26,3 @@ app.listen(port, () => {
 
 // Initiating a database connection
 Data();
-// Initaiating a cloudinary connection 
-Cloudinary()
