@@ -1,7 +1,4 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-
-function App() {
+function Song(){
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
   const [image, setImage] = useState(null);
@@ -34,9 +31,7 @@ function App() {
         console.log(err.message);
       });
   }
-
-  return (
-    <div className="flex items-center justify-center h-[87vh] bg-gray-100">
+  return(<div className="flex items-center justify-center h-[87vh] bg-gray-100">
       <form onSubmit={createProduct} className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-4 text-center">Create Product</h2>
         <input 
@@ -84,8 +79,7 @@ function App() {
         </button>
         {data && <p className="mt-4 text-center text-red-500">{data}</p>}
       </form>
-    </div>
-  );
-}
+    </div>)
 
-export default App;
+}
+export default Song
