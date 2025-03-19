@@ -6,12 +6,14 @@ import Cloudinary from './Database/cloudinary.js';
 import SongModel from './models/songModel.js';
 import AlbumModel from './models/albumModel.js';
 import Routes from './routes/route.js';
+import cors from 'cors'
 // Load .env file from the current directory
 dotenv.config();
 
 const app = express();
 app.use(express.json());
-
+// initating cors
+app.use(cors());
 // runnnig Routes
 app.use('/api', Routes)
 // Use PORT from environment variables or fallback to 3000

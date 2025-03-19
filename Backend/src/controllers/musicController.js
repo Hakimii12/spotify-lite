@@ -2,7 +2,7 @@ import SongModel from "../models/songModel.js"
 export async function AddMusic(req,res){
     console.log("Request Body:", req.body);
     console.log("Request File:", req.file);
-    if(!req.body.name ||!req.body.desc ||!req.body.image || !req.body.album || !req.body.album || !req.body.duration){
+    if(!req.body.name ||!req.body.desc ||!req.file.filename || !req.body.album || !req.body.duration || !req.body.file){
         return res.status(400).json({message:"please enter all requered information"})
     }
     const song=new SongModel({
@@ -10,7 +10,7 @@ export async function AddMusic(req,res){
         desc:req.body.desc,
         image: req.file.filename,
         album:req.body.album,
-        file:req.body.album,
+        file:req.body.file,
         duration:req.body.duration
     })
     try {
