@@ -11,7 +11,7 @@ export async function AddMusic(req,res){
     const audioFile=req.files.file[0];
     const imageResult = await cloudinary.uploader.upload(imageFile.path,{resource_type:"auto"})
     const musicResult=await cloudinary.uploader.upload(audioFile.path,{resource_type:"auto"})
-    const duration=`${Math.floor(musicResult/60)}:${Math.floor(musicResult%60)}`
+    const duration=`${Math.floor(musicResult.duration/60)}:${Math.floor(musicResult.duration%60)}`
     const song=new SongModel({
         name:req.body.name,
         desc:req.body.desc,
