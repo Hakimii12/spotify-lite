@@ -3,14 +3,26 @@ import React, { useState } from 'react';
 import Album from './components/album';
 import Song from './components/song';
 import {Routes,Route} from 'react-router-dom'
+import {ToastContainer,toast} from 'react-toastify'
+import AddAlbum from './pages/AddAlbum'
+import AddSong from './pages/AddSong'
+import ListAlbum from './pages/ListAlbum'
+import ListSong from './pages/ListSong'
 function App() {
-
-
   return (
-    <Routes>
-      <Route path='/' element={<Album/>}/>
-      <Route path='/song' element={<Song/>}/>
+    <div className="flex items-start min-h-screen">
+     <ToastContainer/>
+     <div className="flex-1 h-screen overflow-y-scroll bg-[#F3FFF7]">
+      <div className="pt-8 pl-5 sm:pt-12 sm:pl-12">
+      <Routes>
+      <Route path='/add-song' element={<AddAlbum/>}/>
+      <Route path='/add-album' element={<AddSong/>}/>
+      <Route path='/list-song' element={<ListSong/>}/>
+      <Route path='/list-album' element={<ListAlbum/>}/>
     </Routes>
+      </div>
+     </div>
+    </div>
   );
 }
 export default App;
