@@ -8,7 +8,8 @@ function AddAlbum() {
   const [album, setAlbum] = useState('');
   const [file, setFile] = useState(false);
   const [data, setData] = useState("");
-  const [loading,setLoading]=useState('');
+  const [loading,setLoading]=useState(false);
+  const [albumData,setAlbumData]=useState([])
   function createProduct(event) {
     event.preventDefault();
     const formData = new FormData();
@@ -44,7 +45,7 @@ function AddAlbum() {
           onChange={(event) => setFile(event.target.files[0])}
         />
         <label htmlFor='song'>
-          <img src={assets.upload_song} className='w-24 cursor-pointer' />
+          <img  src={file ?assets.upload_added:assets.upload_song} className='w-24 cursor-pointer' />
         </label>
         </div>
         <div className="flex flex-col gap-2">
@@ -52,7 +53,7 @@ function AddAlbum() {
           <input type="file" id='image' hidden accept='image/*'
           onChange={(event) => setImage(event.target.files[0])}
         />
-        <label htmlFor="image"><img src={assets.upload_area} className='w-24 cursor-pointer' /></label>
+        <label htmlFor="image"><img src={image ? URL.createObjectURL(image):assets.upload_area} className='w-24 cursor-pointer' /></label>
         </div>
         </div>
         <div className="flex flex-col gap-2.5 ">
@@ -71,7 +72,7 @@ function AddAlbum() {
         </div>
         <div className="flex flex-col gap-2.5 ">
           <p>Album</p>
-          <select onChange={(event) => setDesc(event.target.value)} className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[150px]' name="" id="">
+          <select onChange={(event) => setDesc(event.target.value)} defaultValue={album} className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[150px]' name="" id="">
             <option value="none">none</option>
           </select>
         </div>
