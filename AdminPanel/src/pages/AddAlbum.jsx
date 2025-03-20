@@ -1,16 +1,18 @@
 import React from 'react'
 import { useState } from 'react';
 import { assets } from '../assets/admin-assets/assets';
+import {ToastContainer,toast} from 'react-toastify'
+import axios from 'axios';
 function AddAlbum() {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
   const [image, setImage] = useState(false);
-  const [album, setAlbum] = useState('');
+  const [album, setAlbum] = useState('none');
   const [file, setFile] = useState(false);
-  const [data, setData] = useState("");
   const [loading,setLoading]=useState(false);
   const [albumData,setAlbumData]=useState([])
   function createProduct(event) {
+    setLoading(true)
     event.preventDefault();
     const formData = new FormData();
     formData.append('name', name);
@@ -25,18 +27,31 @@ function AddAlbum() {
         }
       })
       .then((res) => {
-        setData("Successfully created product");
-        setName("");
-        setDesc("");
-        setImage(null);
-        setAlbum("");
-        setFile(null);
+        console.log(res)
+        if(res.data.data.success){
+           setLoading(false);
+            toast.success('song added')
+            setName("");
+            setDesc("");
+            setImage(false);
+            setAlbum("none");
+            setFile(false);
+        }
+        else{
+          setLoading(false);
+          toast.error('Failed to add song')
+        };
       }).catch((err) => {
-        setData(`Failed to create product: ${err.response?.data?.message || err.message}`);
+        setLoading(false);
+        toast.error(`Failed to create product: ${err.response?.data?.message || err.message}`);
         console.log(err.message);
-      });
+      })
   }
-  return (
+  return loading ? (
+    <div className="grid place-items-center min-h-[80vh]">
+      <div className="w-16 h-16 place-items-center border-4 border-gray-400 border-t-green-800 rounded-full animate-spin"></div>
+    </div>
+  ) :(
     <form onSubmit={createProduct} className='flex flex-col items-start gap-8 text-gray-600'>
       <div className="flex gap-8" >
         <div className="flex flex-col gap-2">
@@ -65,7 +80,7 @@ function AddAlbum() {
         </div>
         <div className="flex flex-col gap-2.5 ">
           <p>Song Description</p>
-          <input type="text"  value={name} placeholder='type here' className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[max(40vw,250px)]'
+          <input type="text"  value={desc} placeholder='type here' className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[max(40vw,250px)]'
            required 
            onChange={(event) => setDesc(event.target.value)}
         />
@@ -73,13 +88,12 @@ function AddAlbum() {
         <div className="flex flex-col gap-2.5 ">
           <p>Album</p>
           <select onChange={(event) => setDesc(event.target.value)} defaultValue={album} className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[150px]' name="" id="">
-            <option value="none">none</option>
+            <option value={album}>none</option>
           </select>
         </div>
         <button type='submit' className=" text-base bg-black text-white py-2.5 px-14 cursor-pointer">
           ADD
         </button>
-        {data && <p className="mt-4 text-center text-red-500">{data}</p>}
     </form>
   )
 }

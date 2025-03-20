@@ -23,7 +23,7 @@ export async function AddMusic(req,res){
             duration:duration
         })
         await song.save()
-        res.status(201).json(song)
+        res.status(201).json({data:{success:true}})
     } catch (error) {
         res.status(500).json({message:error.message})
     }
