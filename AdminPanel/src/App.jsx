@@ -8,10 +8,12 @@ import AddAlbum from './pages/AddAlbum'
 import AddSong from './pages/AddSong'
 import ListAlbum from './pages/ListAlbum'
 import ListSong from './pages/ListSong'
+import Sidebar from './components/Sidebar';
 function App() {
   return (
     <div className="flex items-start min-h-screen">
      <ToastContainer/>
+     <Sidebar/>
      <div className="flex-1 h-screen overflow-y-scroll bg-[#F3FFF7]">
       <div className="pt-8 pl-5 sm:pt-12 sm:pl-12">
       <Routes>
