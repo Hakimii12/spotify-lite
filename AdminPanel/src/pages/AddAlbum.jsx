@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { assets } from '../assets/admin-assets/assets';
 import {ToastContainer,toast} from 'react-toastify'
 import axios from 'axios';
+import Loading from '../components/Loading'
 function AddAlbum() {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
@@ -48,9 +49,7 @@ function AddAlbum() {
       })
   }
   return loading ? (
-    <div className="grid place-items-center min-h-[80vh]">
-      <div className="w-16 h-16 place-items-center border-4 border-gray-400 border-t-green-800 rounded-full animate-spin"></div>
-    </div>
+    <Loading/>
   ) :(
     <form onSubmit={createProduct} className='flex flex-col items-start gap-8 text-gray-600'>
       <div className="flex gap-8" >
