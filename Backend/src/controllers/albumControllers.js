@@ -19,3 +19,20 @@ export async function AddAlbum(req,res){
          res.status(500).json({message:error.message})
     }
 }
+export async function ListAlbum(req,res) {
+    try {
+        const album= await AlbumModel.find({})
+        res.status(200).json({data:album})
+    } catch (error) {
+       res.status(500).json({message:error.message}) 
+    }
+}
+export async function DeleteAlbum(req,res) {
+    const {id}=req.params
+    try {
+       await AlbumModel.findByIdAndDelete(id)
+       res.status(200).json({message:"album deleted"})
+    } catch (error) {
+        res.status(500).json({message:error.message})  
+    }
+}

@@ -37,12 +37,10 @@ export async function MusicList(req,res){
     }
 }
 export async function DeleteList(req,res){
-    console.log(req.params)
     const {id}=req.params
     try {
-      const data=await SongModel.findById(id)
       await SongModel.findByIdAndDelete(id)
-      res.status(200).json({message:"successfully deleted", data:data,})
+      res.status(200).json({message:"successfully deleted"})
     } catch (error) {
        res.status(500).json({message:error.message}); 
     }

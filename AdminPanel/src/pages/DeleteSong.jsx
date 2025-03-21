@@ -7,18 +7,11 @@ function DeleteSong() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [loading, setLoading] = useState(false);
-    const [song,setSong]=useState([])
-    useEffect(()=>{
-        axios
-        .get(`http://localhost:4000/api/music/delete/${id}`)
-        .then((res)=>{
-            setSong(res.data.data)
-        })
-    })
     async function deleteSong(){
             setLoading(true);
             try {
                 const res = await axios.delete(`http://localhost:4000/api/music/delete/${id}`);
+                console.log(res);
             } catch (error) {
                 setLoading(false);
                 toast.error('Error deleting song');
@@ -29,14 +22,11 @@ function DeleteSong() {
                 setLoading(false);
             }
 };
+    useEffect(()=>{
+        deleteSong()
+    },[])
 
-        return loading ? (<Loading />):  (<div>
-            <p>are you going to delete ?</p>
-            <p>{song.name}</p>
-            <img src={song.image} className='w-24 cursor-pointer'/>
-            <button onClick={navigate('/list-song')}> No</button>
-            <button onClick={deleteSong()}> Yes</button>
-        </div>) 
+        return loading ? (<Loading />):  (<></>) 
 }
 
 export default DeleteSong;
