@@ -6,7 +6,6 @@ function PlayerContextProvider(props){
     const [song, setSong]=useState('')
     const [music,setMusic]=useState([])
     const [album,setAlbum]=useState([])
-    let currentValue=""
     async function albumData(){
         await axios
         .get("http://localhost:4000/api/album/list")
@@ -77,8 +76,6 @@ function PlayerContextProvider(props){
      async function next(){
         music.map(async(val,i)=>{
             if(val.file===song && i<music.length-1){
-                console.log(true)
-                console.log(music)
                 await setSong(music[i+1].file)
                 await audioRef.current.play()
                 await setisplaying(true);
@@ -100,7 +97,6 @@ function PlayerContextProvider(props){
         const seekTime = (offsetX / seekBgWidth) * audioRef.current.duration;
         audioRef.current.currentTime = seekTime;
       }
-      console.log(currentValue)
     const ContextValue={
         setisplaying,isplaying,
         audioRef,
@@ -115,7 +111,6 @@ function PlayerContextProvider(props){
         seekSong,
         music ,setMusic,
         album,setAlbum,
-        currentValue
     }
     return(
         <contextProvider.Provider value={ContextValue}>

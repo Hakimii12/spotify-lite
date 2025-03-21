@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { assets } from '../assets/frontend-assets/assets'
 import { contextProvider } from '../context/constextApi'
 function player() {
@@ -13,13 +13,21 @@ function player() {
     previews,next,
     time,
     seekSong}=useContext(contextProvider)
+    const [tempo,setTempo]=useState('')
+    useEffect(()=>{
+      music.map((val,i)=>{
+        if(val.file==song)
+           setTempo(val)
+      })
+      
+    }) 
   return (
     <div className='h-[10%] bg-black flex justify-between items-center text-white px-4'>
       <div className='hidden lg:flex items-center gap-4'>
-        <img className='w-12' src={music.image} alt="" />
+        <img className='w-12' src={tempo.image} alt="" />
         <div>
-          <p className='text-white'>{song.name}</p>
-          <p>{song.desc}</p>
+          <p className='text-white'>{tempo.name}</p>
+          <p>{tempo ?tempo.desc.slice(0, 10)+"...":tempo}</p>
         </div>
       </div>
       <div className="flex flex-col gap-1 m-auto">
