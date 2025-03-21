@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { assets, songsData } from '../assets/frontend-assets/assets'
+import { assets } from '../assets/frontend-assets/assets'
 import { contextProvider } from '../context/constextApi'
 function player() {
   const {
@@ -9,15 +9,16 @@ function player() {
     playsong,
     pausesong,
     song,
+    music,
     previews,next,
     time,
     seekSong}=useContext(contextProvider)
   return (
     <div className='h-[10%] bg-black flex justify-between items-center text-white px-4'>
       <div className='hidden lg:flex items-center gap-4'>
-        <img className='w-12' src={songsData[0].image} alt="" />
+        <img className='w-12' src={music.image} alt="" />
         <div>
-          <p>{song.name}</p>
+          <p className='text-white'>{song.name}</p>
           <p>{song.desc}</p>
         </div>
       </div>
@@ -53,5 +54,4 @@ function player() {
     </div>
   )
 }
-
 export default player
