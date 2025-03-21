@@ -24,6 +24,7 @@ function App() {
       <Route path='/add-song' element={<AddAlbum/>}/>
       <Route path='/add-album' element={<AddSong/>}/>
       <Route path='/list-song' element={<ListSong/>}/>
+      <Route path='/list-album' element={<ListAlbum/>}/>
       <Route path='/delete-album/:id' element={<DeleteAlbum/>}/>
       <Route path='/delete-song/:id' element={<DeleteSong/>}/>
     </Routes>
