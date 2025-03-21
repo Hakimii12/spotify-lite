@@ -3,7 +3,7 @@ import { songsData } from "../assets/frontend-assets/assets";
 import axios from 'axios'
 export  const contextProvider=createContext()
 function PlayerContextProvider(props){
-    const [song, setSong]=useState(songsData[0])
+    const [song, setSong]=useState('')
     const [music,setMusic]=useState([])
     const [album,setAlbum]=useState([])
     async function albumData(){
@@ -18,12 +18,9 @@ function PlayerContextProvider(props){
         .get("http://localhost:4000/api/music/list")
         .then((res)=>{
           setMusic(res.data.data)
+          setSong(res.data.data[1].file)
         })
     }
-    useEffect(()=>{
-        songData()
-        albumData()
-    })
     const [time, setTime]=useState({
         currentTime:{
             seconds:0,
@@ -41,6 +38,7 @@ function PlayerContextProvider(props){
     function playsong(){
         audioRef.current.play()
         setisplaying(true)
+
     }
     function pausesong(){
         audioRef.current.pause()
@@ -61,22 +59,40 @@ function PlayerContextProvider(props){
                })
        }
      },[audioRef])
+     useEffect(()=>{
+        songData()
+        albumData()
+    },[])
      async function previews(){
-        if(song.id>0){
-            await setSong(music[song.id-1])
-            await audioRef.current.play()
-            await setisplaying(true);
-        }
+        music.map(async(val,i)=>{
+            if(val.file===song && i>0){
+                console.log(true)
+                console.log(music)
+                await setSong(music[i-1].file)
+                await audioRef.current.play()
+                await setisplaying(true);
+            }
+
+        })
      }
      async function next(){
-        if(song.id < songsData.length-1){
-            await setSong(music[song.id+1])
-            await audioRef.current.play()
-            await setisplaying(true);
-        }
+        music.map(async(val,i)=>{
+            if(val.file===song && i<music.length-1){
+                console.log(true)
+                console.log(music)
+                await setSong(music[i+1].file)
+                await audioRef.current.play()
+                await setisplaying(true);
+            }
+
+        })
      }
      async function thisMusic(id){
-        await setSong(music[id])
+        console.log(song)
+        await music.map((item)=>{
+            if(item._id===id){
+                setSong(item.file)
+            }})
         await audioRef.current.play()
         await setisplaying(true);
      }

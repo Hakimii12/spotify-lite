@@ -5,18 +5,19 @@ import Display from './components/display'
 import { useContext } from 'react'
 import { contextProvider } from './context/constextApi'
 function App() {
-  const {music,audioRef}=useContext(contextProvider)
+  const {music,song,audioRef}=useContext(contextProvider)
   return (
     <>
        <div className='bg-black h-screen'>
+        {music.length !==0
+        ?<>
         <div className="h-[90%] flex">
-          <Sidebar/>
-          <Display/>
-        </div>
-        <div>
-          <Player/>
-          <audio ref={audioRef} preload="auto" src={music?.file}></audio>
-        </div>
+        <Sidebar/>
+        <Display/>
+      </div>
+        <Player/>
+        </>:null}
+          <audio ref={audioRef} preload="auto" src={song}></audio>
        </div>
     </>
   )
