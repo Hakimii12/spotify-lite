@@ -11,14 +11,6 @@ function AddAlbum() {
   const [loading,setLoading]=useState(false);
   const [albumData,setAlbumData]=useState([])
   function createProduct(event) {
-    useEffect(()=>{
-      axios
-      .get("http://localhost:4000/api/album/list")
-      .then((res)=>{
-        console.log(res)
-        setAlbumData(res.data.data)
-      })
-    },[]);
     setLoading(true)
     event.preventDefault();
     const formData = new FormData();
@@ -32,9 +24,6 @@ function AddAlbum() {
         }
       })
       .then((res) => {
-        console.log(albumData)
-        console.log(res)
-        console.log(res.data.message)
         if(res.data.message){
            setLoading(false);
             toast.success('song added')

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { assets } from '../assets/admin-assets/assets';
 import {ToastContainer,toast} from 'react-toastify'
@@ -12,6 +12,16 @@ function AddAlbum() {
   const [file, setFile] = useState(false);
   const [loading,setLoading]=useState(false);
   const [albumData,setAlbumData]=useState([])
+  async function albumdata(){
+    await axios
+    .get("http://localhost:4000/api/album/list")
+    .then((res)=>{
+      setAlbumData(res.data.data)
+    })
+  }
+  useEffect(()=>{
+    albumdata()
+  },[]);
   function createProduct(event) {
     setLoading(true)
     event.preventDefault();
@@ -28,7 +38,6 @@ function AddAlbum() {
         }
       })
       .then((res) => {
-        console.log(res)
         if(res.data.data.success){
            setLoading(false);
             toast.success('song added')
@@ -86,8 +95,12 @@ function AddAlbum() {
         </div>
         <div className="flex flex-col gap-2.5 ">
           <p>Album</p>
-          <select onChange={(event) => setDesc(event.target.value)} defaultValue={album} className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[150px]' name="" id="">
-            <option value={album}>none</option>
+          <select onChange={(event) => setAlbum(event.target.value)} defaultValue={album} className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[150px]'>
+            {albumData.map((data,index)=>{
+              return(
+                <option key={index} value={data.name}>{data.name}</option>  
+              )
+            })}
           </select>
         </div>
         <button type='submit' className=" text-base bg-black text-white py-2.5 px-14 cursor-pointer">
