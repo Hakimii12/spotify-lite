@@ -8,17 +8,17 @@ function player() {
     seekbar,
     playsong,
     pausesong,
-    song,
     previews,next,
     time,
-    seekSong}=useContext(contextProvider)
+    seekSong,
+    music}=useContext(contextProvider)
   return (
     <div className='h-[10%] bg-black flex justify-between items-center text-white px-4'>
       <div className='hidden lg:flex items-center gap-4'>
         <img className='w-12' src={songsData[0].image} alt="" />
         <div>
-          <p>{song.name}</p>
-          <p>{song.desc.slice(0,12)}</p>
+          <p>{music.name}</p>
+          <p>{music.desc}</p>
         </div>
       </div>
       <div className="flex flex-col gap-1 m-auto">

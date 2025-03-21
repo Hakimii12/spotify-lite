@@ -3,9 +3,12 @@ import { data, useParams } from 'react-router-dom'
 import { albumsData, assets } from '../assets/frontend-assets/assets'
 import Navbar from './navbar'
 import { songsData } from '../assets/frontend-assets/assets'
+import { contextProvider } from '../context/constextApi'
+import { useContext } from 'react'
 function DisplayAlbum() {
   const {id}=useParams()
-  const albumdata= albumsData[id]
+  const {music,album}=useContext(contextProvider)
+  const albumdata= album[id]
   return (
     <><Navbar/>
     <div className='text-white m-5 flex gap-5'>
@@ -27,7 +30,7 @@ function DisplayAlbum() {
         <p className="hidden lg:block">Date Added</p>
         <img className='m-auto w-4' src={assets.clock_icon} alt="" />
     </div>
-    {songsData.map((song,index)=>(
+    {music.map((song,index)=>(
       <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 p-2 items-center">
         <p className="text-white">
           <b className='mr-4 text-[#a7a7a7]'>{index+1}</b>

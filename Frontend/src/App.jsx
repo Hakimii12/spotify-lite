@@ -5,8 +5,7 @@ import Display from './components/display'
 import { useContext } from 'react'
 import { contextProvider } from './context/constextApi'
 function App() {
-  const {song,audioRef}=useContext(contextProvider)
-  console.log(song)
+  const {music,audioRef}=useContext(contextProvider)
   return (
     <>
        <div className='bg-black h-screen'>
@@ -16,7 +15,7 @@ function App() {
         </div>
         <div>
           <Player/>
-          <audio ref={audioRef} preload="auto" src={song?.file}></audio>
+          <audio ref={audioRef} preload="auto" src={music?.file}></audio>
         </div>
        </div>
     </>

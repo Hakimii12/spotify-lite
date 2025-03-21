@@ -1,9 +1,29 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { songsData } from "../assets/frontend-assets/assets";
+import axios from 'axios'
 export  const contextProvider=createContext()
 function PlayerContextProvider(props){
     const [song, setSong]=useState(songsData[0])
-    console.log(songsData,song)
+    const [music,setMusic]=useState([])
+    const [album,setAlbum]=useState([])
+    async function albumData(){
+        await axios
+        .get("http://localhost:4000/api/album/list")
+        .then((res)=>{
+          setAlbum(res.data.data)
+        })
+    }
+    async function songData(){
+        await axios
+        .get("http://localhost:4000/api/music/list")
+        .then((res)=>{
+          setMusic(res.data.data)
+        })
+    }
+    useEffect(()=>{
+        songData()
+        albumData()
+    })
     const [time, setTime]=useState({
         currentTime:{
             seconds:0,
@@ -43,20 +63,20 @@ function PlayerContextProvider(props){
      },[audioRef])
      async function previews(){
         if(song.id>0){
-            await setSong(songsData[song.id-1])
+            await setSong(music[song.id-1])
             await audioRef.current.play()
             await setisplaying(true);
         }
      }
      async function next(){
         if(song.id < songsData.length-1){
-            await setSong(songsData[song.id+1])
+            await setSong(music[song.id+1])
             await audioRef.current.play()
             await setisplaying(true);
         }
      }
      async function thisMusic(id){
-        await setSong(songsData[id])
+        await setSong(music[id])
         await audioRef.current.play()
         await setisplaying(true);
      }
@@ -78,6 +98,8 @@ function PlayerContextProvider(props){
         previews,next,
         thisMusic,
         seekSong,
+        music ,setMusic,
+        album,setAlbum
     }
     return(
         <contextProvider.Provider value={ContextValue}>
