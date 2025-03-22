@@ -5,8 +5,9 @@ import Navbar from './navbar'
 import { contextProvider } from '../context/constextApi'
 function DisplayAlbum({albumItem}) {
   const {id}=useParams()
-  const {music,album}=useContext(contextProvider)
+  const {music,album,thisMusic}=useContext(contextProvider)
   const [albumdata,setAlbumdaata]=useState("");
+  console.log(albumdata._id)
   useEffect(()=>{
       album.map((item)=>{
         if(item._id==id){
@@ -35,8 +36,8 @@ function DisplayAlbum({albumItem}) {
         <p className="hidden lg:block">Date Added</p>
         <img className='m-auto w-4' src={assets.clock_icon} alt={null} />
     </div>
-    {music.filter((item)=>(item.album===album.name)).map((song,index)=>(
-      <div onClick={()=>thisMusic(item._id)} className="grid grid-cols-3 sm:grid-cols-4 gap-4 p-2 items-center">
+    {music.filter((item)=>(item.album===albumItem.name)).map((song,index)=>(
+      <div onClick={()=>thisMusic(song._id)} className="grid grid-cols-3 sm:grid-cols-4 gap-4 p-2 items-center">
         <p className="text-white">
           <b className='mr-4 text-[#a7a7a7]'>{index+1}</b>
            <img src={song.image} alt={null} className="inline w-10 mr-5 " />
