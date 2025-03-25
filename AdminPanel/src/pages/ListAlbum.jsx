@@ -6,7 +6,7 @@ function ListAlbum() {
   const [album,setAlbum]=useState([])
   useEffect(()=>{
     axios
-    .get("http://localhost:4000/api/album/list")
+    .get("https://spotify-lite-backend.onrender.com/api/album/list")
     .then((res)=>{
       console.log(res)
       setAlbum(res.data.data)

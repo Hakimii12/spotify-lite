@@ -10,7 +10,7 @@ function DeleteAlbum() {
     async function deleteAlbum(){
             setLoading(true);
             try {
-                const res = await axios.delete(`http://localhost:4000/api/album/delete/${id}`);
+                const res = await axios.delete(`https://spotify-lite-backend.onrender.com/album/delete/${id}`);
             } catch (error) {
                 setLoading(false);
                 toast.error('Error Deleting Album');

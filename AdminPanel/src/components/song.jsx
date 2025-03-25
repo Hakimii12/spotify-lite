@@ -14,7 +14,7 @@ function Song(){
     formData.append('album', album);
     formData.append('file', file);
     axios
-      .post("http://localhost:4000/api/music/add", formData, {
+      .post("https://spotify-lite-backend.onrender.com/api/music/add", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

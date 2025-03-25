@@ -18,7 +18,7 @@ const Album = () => {
     formData.append("image", image);
 
     axios
-      .post("http://localhost:4000/api/album/add", formData, {
+      .post("https://spotify-lite-backend.onrender.com/api/album/add", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

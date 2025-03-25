@@ -10,7 +10,7 @@ function DeleteSong() {
     async function deleteSong(){
             setLoading(true);
             try {
-                const res = await axios.delete(`http://localhost:4000/api/music/delete/${id}`);
+                const res = await axios.delete(`https://spotify-lite-backend.onrender.com/api/music/delete/${id}`);
                 console.log(res);
             } catch (error) {
                 setLoading(false);

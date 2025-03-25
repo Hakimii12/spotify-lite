@@ -8,14 +8,14 @@ function PlayerContextProvider(props){
     const [album,setAlbum]=useState([])
     async function albumData(){
         await axios
-        .get("http://localhost:4000/api/album/list")
+        .get("https://spotify-lite-backend.onrender.com/api/album/list")
         .then((res)=>{
           setAlbum(res.data.data)
         })
     }
     async function songData(){
         await axios
-        .get("http://localhost:4000/api/music/list")
+        .get("https://spotify-lite-backend.onrender.com/api/music/list")
         .then((res)=>{
           setMusic(res.data.data)
           setSong(res.data.data[1].file)

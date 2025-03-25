@@ -6,7 +6,7 @@ function ListSong() {
   const [song,setSong]=useState([])
   useEffect(()=>{
     axios
-    .get('http://localhost:4000/api/music/list')
+    .get('https://spotify-lite-backend.onrender.com/api/music/list')
     .then((res)=>{
       setSong(res.data.data)
     })
